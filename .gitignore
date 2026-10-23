@@ -1,0 +1,33 @@
+# === DUT Network Management .gitignore ===
+
+# Executables & Installer Binaries (> 100MB)
+*.exe
+*.msi
+*.iso
+*.ova
+*.vmdk
+*.vdi
+
+# Packet Tracer backup files & logs
+*.bak
+*.log
+
+# Heavy Archives
+*.zip
+*.tar*
+*.rar
+*.7z
+
+# Python & Virtual Environments (if any)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini

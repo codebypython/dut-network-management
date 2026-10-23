@@ -1,0 +1,5 @@
+chi phí đi dây, chi phí công thợ, chi phí cấu hình
+- dung switch ppe phải xác định chủ động hay bị động, cần xác định dải điện áp hạn mức của ap
+
+lab vlsm
+- u = 19 => phân chia theo vlsm thiết kế giấy
