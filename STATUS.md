@@ -1,13 +1,13 @@
 # 📊 PROJECT STATUS DASHBOARD — NetAdmin Corp (CORP-03-NMA)
 
-> **Cập nhật lần cuối**: 2026-10-20 | **Tuần hiện tại**: Tuần 5 (Multi Area OSPF, EIGRP & Redistribution)  
+> **Cập nhật lần cuối**: 2026-11-03 | **Tuần hiện tại**: Tuần 6 (EIGRP, OSPF, Inter-VLAN, Dual-ISP NAT & Redistribution)  
 > **Mentor chuyên trách**: DUT Network Admin Mentor (`01_Strategy_and_Curriculum/AGENT_PROFILE.md`)
 
 ---
 
-## Current Phase: 🔵 PHASE 1 — INFRASTRUCTURE & CORE SERVICES (Tuần 1-5)
+## Current Phase: 🔵 PHASE 1 — INFRASTRUCTURE & CORE SERVICES (Tuần 1-6)
 
-Tập trung vào quy hoạch IP, Subnetting VLSM, cấu hình định tuyến cơ bản, VLAN/Trunking, Multi-Area OSPF, EIGRP AS 69, Route Redistribution và dịch vụ lõi DHCP/NAT.
+Tập trung vào quy hoạch IP, Subnetting VLSM, cấu hình định tuyến cơ bản, VLAN/Trunking, Multi-Area OSPF, EIGRP AS 66 & 99, Route Redistribution, Dual-ISP NAT Overload và ACL bảo mật.
 
 ---
 
@@ -18,6 +18,7 @@ Tập trung vào quy hoạch IP, Subnetting VLSM, cấu hình định tuyến c�
 - [x] Cấu hình DHCP Server (DORA, Scope, Reservation, Relay Agent - Lab 3/4)
 - [x] Định tuyến tĩnh & Inter-VLAN Routing (Router-on-a-stick / SVI - Lab 4)
 - [x] Định tuyến nâng cao OSPF Đa vùng, EIGRP AS 69 & Tái phân phối (Redistribution - Lab Day 5)
+- [x] Định tuyến tích hợp EIGRP 66/99, OSPF Area 0, Dual-ISP NAT & Extended ACL 101 (Lab Day 6)
 - [ ] Cấu hình DNS Server (Forward/Reverse Lookup, MX, CNAME, Root Hints)
 
 ### Module 2: Định Danh & Thư Mục (Directory Services)
@@ -41,11 +42,12 @@ Tập trung vào quy hoạch IP, Subnetting VLSM, cấu hình định tuyến c�
 ---
 
 ## Last Session
-- **Date**: 2026-10-20
+- **Date**: 2026-11-03
 - **Work Done**: 
-  - Giải mã và hạ cấp chữ ký tương thích thành công cho file `03_Engineering_Labs_and_Code/Day5/ISP service.pkt` từ bản 9.0.1.0858 xuống 8.2.2.0400 bằng Twofish/EAX Repacket, bảo đảm mở mượt mà trên Cisco Packet Tracer 8.2.2 của sinh viên.
-  - Tinh chỉnh và chuẩn hóa cấu trúc thư mục Day 5: Dọn dẹp các thư mục trùng lặp, tạo thư mục `device_configs/` gồm 9 file `.cfg` độc lập cho từng thiết bị (`Server`, `Client`, `Earth`, `Mars`, `Venus`, `Jupiter`, `Mecury`, `Neptune`, `ISP`) và lưu trữ bản nháp cũ vào `raw_notes/`.
-  - Phát hiện và hiệu chỉnh các điểm cốt tử trong topology: Cổng kết nối PC0 là `Client Fa0/10` (thay vì Fa0/3), kiến trúc Gateway VLAN 69 và 3 máy chủ Internet (`Google DNS 8.8.8.8`, `Google Mail 8.8.8.10`, `Web 8.8.8.11`) trên ISP.
-  - Xây dựng công cụ kiểm toán tự động `05_Troubleshooting_and_Toolkits/audit_day5_pkt.py` quét toàn bộ cấu trúc XML/PKT: **Đạt 41/41 tiêu chí kỹ thuật (100.0% PASSED)**.
-  - Xuất bản Cẩm nang Master duy nhất `HUONG_DAN_HOAN_CHINH_LAB_5_MULTI_AREA_OSPF_EIGRP_VLAN.md` tích hợp toàn bộ kiến trúc, bảng VLSM, CLI 7 giai đoạn, quy trình kiểm thử 5 bước và cẩm nang vấn đáp điểm 10/10.
-- **Next Priority (P0)**: Sinh viên mở file `ISP service.pkt` trực tiếp trên Cisco Packet Tracer 8.2.2 và thực hiện các bước ping/tracert nghiệm thu.
+  - Phân tích và phát hiện xung đột phân vùng định tuyến trong bản nháp cũ của Day 6: Chuẩn hóa Vùng Tây (`EIGRP AS 66` - `172.21.0.0/16`), Vùng Giữa (`EIGRP AS 99` - `172.22.0.0/16`), Vùng Đông (`OSPF Area 0` - `172.23.0.0/16`), bảo đảm lệnh `default-information originate` trên `EastGate` đúng 100% cú pháp gốc OSPF.
+  - Chuẩn hóa kỹ thuật quảng bá Tuyến ngầm định trên `WestGate` theo yêu cầu/gợi ý của Thầy: Sử dụng `ip default-network 10.0.0.0` kết hợp quảng bá `network 10.0.0.0` trong `router eigrp 66` (hoàn toàn không dùng `ip route 0.0.0.0 0.0.0.0` hay `redistribute static`).
+  - Cập nhật và đồng bộ toàn bộ 9 file cấu hình trong `03_Engineering_Labs_and_Code/Day6/device_configs/` (`01_Server_Switch.cfg` đến `09_ISP_East_Router.cfg`).
+  - Xây dựng tài liệu cấu hình máy trạm `10_End_Hosts_PC_Configurations.md` cho 8 PC/Server, hướng dẫn bật Web/Telnet trên `PC-East` để kiểm thử hộp trắng ACL 101.
+  - Xuất bản Cẩm nang Master toàn diện `HUONG_DAN_HOAN_CHINH_LAB_6_EIGRP_OSPF_VLAN_NAT.md` tích hợp VLSM 12 subnets, ma trận đấu nối vật lý, CLI 8 giai đoạn, quy trình nghiệm thu và cẩm nang vấn đáp điểm 10/10.
+  - Xây dựng công cụ kiểm toán tự động `05_Troubleshooting_and_Toolkits/audit_day6_configs.py`: **Đạt 56/56 tiêu chí kỹ thuật (100.0% PASSED)**.
+- **Next Priority (P0)**: Sinh viên mở Cisco Packet Tracer 8.2.2, tạo topology theo ma trận cổng và copy-paste cấu hình CLI vào từng thiết bị.
